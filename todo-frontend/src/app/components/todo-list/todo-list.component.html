@@ -1,0 +1,20 @@
+<h1>Doug's Angular To-do List</h1>
+
+<ul class="todo-list">
+  <li *ngFor="let todo of todos; let i = index">
+    <div class="todo-list-item">
+      <label>
+        <input type="checkbox" [checked]="todo.isCompleted" (change)="toggleItem(i)">
+        {{ todo.title }} <small *ngIf="todo.completedAt !== null">at {{ todo.completedAt | date: 'medium' }}</small>
+      </label>
+    </div>
+  </li>
+</ul>
+
+<form (ngSubmit)="addTodo(todoForm)" #todoForm="ngForm">
+  <input name="title" id="title" [(ngModel)]="title">
+  <button class="btn" type="submit" [disabled]="!todoForm.form.valid">Add New Todo</button>
+</form>
+
+<button class="btn" (click)="deleteAllItems()">Clear Todos</button>
+
